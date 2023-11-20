@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AnimalShelterModelStoreContainer" CdmEntityContainer="AnimalShelterEntities">
+    <FunctionImportMapping FunctionImportName="spGetAnimals1" FunctionName="AnimalShelterModel.Store.spGetAnimals">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnimalShelterModel.spGetAnimals1_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="age_upon_outcome" ColumnName="age_upon_outcome" />
+          <ScalarProperty Name="animal_id" ColumnName="animal_id" />
+          <ScalarProperty Name="animal_type" ColumnName="animal_type" />
+          <ScalarProperty Name="breed" ColumnName="breed" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="monthyear" ColumnName="monthyear" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="outcome_subtype" ColumnName="outcome_subtype" />
+          <ScalarProperty Name="outcome_type" ColumnName="outcome_type" />
+          <ScalarProperty Name="sex_upon_outcome" ColumnName="sex_upon_outcome" />
+          <ScalarProperty Name="location_lat" ColumnName="location_lat" />
+          <ScalarProperty Name="location_long" ColumnName="location_long" />
+          <ScalarProperty Name="age_upon_outcome_in_weeks" ColumnName="age_upon_outcome_in_weeks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetWaterRescue" FunctionName="AnimalShelterModel.Store.spGetWaterRescue">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnimalShelterModel.spGetWaterRescue_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="age_upon_outcome" ColumnName="age_upon_outcome" />
+          <ScalarProperty Name="animal_id" ColumnName="animal_id" />
+          <ScalarProperty Name="animal_type" ColumnName="animal_type" />
+          <ScalarProperty Name="breed" ColumnName="breed" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="monthyear" ColumnName="monthyear" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="outcome_subtype" ColumnName="outcome_subtype" />
+          <ScalarProperty Name="outcome_type" ColumnName="outcome_type" />
+          <ScalarProperty Name="sex_upon_outcome" ColumnName="sex_upon_outcome" />
+          <ScalarProperty Name="location_lat" ColumnName="location_lat" />
+          <ScalarProperty Name="location_long" ColumnName="location_long" />
+          <ScalarProperty Name="age_upon_outcome_in_weeks" ColumnName="age_upon_outcome_in_weeks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetDisasterIndividualRescue" FunctionName="AnimalShelterModel.Store.spGetDisasterIndividualRescue">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnimalShelterModel.spGetDisasterIndividualRescue_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="age_upon_outcome" ColumnName="age_upon_outcome" />
+          <ScalarProperty Name="animal_id" ColumnName="animal_id" />
+          <ScalarProperty Name="animal_type" ColumnName="animal_type" />
+          <ScalarProperty Name="breed" ColumnName="breed" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="monthyear" ColumnName="monthyear" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="outcome_subtype" ColumnName="outcome_subtype" />
+          <ScalarProperty Name="outcome_type" ColumnName="outcome_type" />
+          <ScalarProperty Name="sex_upon_outcome" ColumnName="sex_upon_outcome" />
+          <ScalarProperty Name="location_lat" ColumnName="location_lat" />
+          <ScalarProperty Name="location_long" ColumnName="location_long" />
+          <ScalarProperty Name="age_upon_outcome_in_weeks" ColumnName="age_upon_outcome_in_weeks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetMountainWildernessRescue" FunctionName="AnimalShelterModel.Store.spGetMountainWildernessRescue">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnimalShelterModel.spGetMountainWildernessRescue_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="age_upon_outcome" ColumnName="age_upon_outcome" />
+          <ScalarProperty Name="animal_id" ColumnName="animal_id" />
+          <ScalarProperty Name="animal_type" ColumnName="animal_type" />
+          <ScalarProperty Name="breed" ColumnName="breed" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="monthyear" ColumnName="monthyear" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="outcome_subtype" ColumnName="outcome_subtype" />
+          <ScalarProperty Name="outcome_type" ColumnName="outcome_type" />
+          <ScalarProperty Name="sex_upon_outcome" ColumnName="sex_upon_outcome" />
+          <ScalarProperty Name="location_lat" ColumnName="location_lat" />
+          <ScalarProperty Name="location_long" ColumnName="location_long" />
+          <ScalarProperty Name="age_upon_outcome_in_weeks" ColumnName="age_upon_outcome_in_weeks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="aac_shelter_outcomes">
+      <EntityTypeMapping TypeName="AnimalShelterModel.aac_shelter_outcomes">
+        <MappingFragment StoreEntitySet="aac_shelter_outcomes">
+          <ScalarProperty Name="age_upon_outcome_in_weeks" ColumnName="age_upon_outcome_in_weeks" />
+          <ScalarProperty Name="location_long" ColumnName="location_long" />
+          <ScalarProperty Name="location_lat" ColumnName="location_lat" />
+          <ScalarProperty Name="sex_upon_outcome" ColumnName="sex_upon_outcome" />
+          <ScalarProperty Name="outcome_type" ColumnName="outcome_type" />
+          <ScalarProperty Name="outcome_subtype" ColumnName="outcome_subtype" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="monthyear" ColumnName="monthyear" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="breed" ColumnName="breed" />
+          <ScalarProperty Name="animal_type" ColumnName="animal_type" />
+          <ScalarProperty Name="animal_id" ColumnName="animal_id" />
+          <ScalarProperty Name="age_upon_outcome" ColumnName="age_upon_outcome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AnimalShelterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AnimalShelterEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="spGetAnimals" ReturnType="Collection(AnimalShelterModel.spGetAnimals_Result)" />
+    <FunctionImport Name="spGetAnimals1" ReturnType="Collection(AnimalShelterModel.spGetAnimals1_Result)" />
+    <FunctionImport Name="spGetWaterRescue" ReturnType="Collection(AnimalShelterModel.spGetWaterRescue_Result)" />
+    <FunctionImport Name="spGetDisasterIndividualRescue" ReturnType="Collection(AnimalShelterModel.spGetDisasterIndividualRescue_Result)" />
+    <FunctionImport Name="spGetMountainWildernessRescue" ReturnType="Collection(AnimalShelterModel.spGetMountainWildernessRescue_Result)" />
+    <EntitySet Name="aac_shelter_outcomes" EntityType="AnimalShelterModel.aac_shelter_outcomes" />
+  </EntityContainer>
+  <ComplexType Name="spGetAnimals_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="age_upon_outcome" Nullable="true" />
+    <Property Type="String" Name="animal_id" Nullable="true" />
+    <Property Type="String" Name="animal_type" Nullable="true" />
+    <Property Type="String" Name="breed" Nullable="true" />
+    <Property Type="String" Name="color" Nullable="true" />
+    <Property Type="String" Name="date_of_birth" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" />
+    <Property Type="String" Name="outcome_subtype" Nullable="true" />
+    <Property Type="String" Name="outcome_type" Nullable="true" />
+    <Property Type="String" Name="sex_upon_outcome" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spGetAnimals1_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="age_upon_outcome" Nullable="true" />
+    <Property Type="String" Name="animal_id" Nullable="true" />
+    <Property Type="String" Name="animal_type" Nullable="true" />
+    <Property Type="String" Name="breed" Nullable="true" />
+    <Property Type="String" Name="color" Nullable="true" />
+    <Property Type="String" Name="date_of_birth" Nullable="true" />
+    <Property Type="String" Name="datetime" Nullable="true" />
+    <Property Type="String" Name="monthyear" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" />
+    <Property Type="String" Name="outcome_subtype" Nullable="true" />
+    <Property Type="String" Name="outcome_type" Nullable="true" />
+    <Property Type="String" Name="sex_upon_outcome" Nullable="true" />
+    <Property Type="Single" Name="location_lat" Nullable="true" />
+    <Property Type="Single" Name="location_long" Nullable="true" />
+    <Property Type="Single" Name="age_upon_outcome_in_weeks" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spGetWaterRescue_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="age_upon_outcome" Nullable="true" />
+    <Property Type="String" Name="animal_id" Nullable="true" />
+    <Property Type="String" Name="animal_type" Nullable="true" />
+    <Property Type="String" Name="breed" Nullable="true" />
+    <Property Type="String" Name="color" Nullable="true" />
+    <Property Type="String" Name="date_of_birth" Nullable="true" />
+    <Property Type="String" Name="datetime" Nullable="true" />
+    <Property Type="String" Name="monthyear" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" />
+    <Property Type="String" Name="outcome_subtype" Nullable="true" />
+    <Property Type="String" Name="outcome_type" Nullable="true" />
+    <Property Type="String" Name="sex_upon_outcome" Nullable="true" />
+    <Property Type="Single" Name="location_lat" Nullable="true" />
+    <Property Type="Single" Name="location_long" Nullable="true" />
+    <Property Type="Single" Name="age_upon_outcome_in_weeks" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spGetDisasterIndividualRescue_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="age_upon_outcome" Nullable="true" />
+    <Property Type="String" Name="animal_id" Nullable="true" />
+    <Property Type="String" Name="animal_type" Nullable="true" />
+    <Property Type="String" Name="breed" Nullable="true" />
+    <Property Type="String" Name="color" Nullable="true" />
+    <Property Type="String" Name="date_of_birth" Nullable="true" />
+    <Property Type="String" Name="datetime" Nullable="true" />
+    <Property Type="String" Name="monthyear" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" />
+    <Property Type="String" Name="outcome_subtype" Nullable="true" />
+    <Property Type="String" Name="outcome_type" Nullable="true" />
+    <Property Type="String" Name="sex_upon_outcome" Nullable="true" />
+    <Property Type="Single" Name="location_lat" Nullable="true" />
+    <Property Type="Single" Name="location_long" Nullable="true" />
+    <Property Type="Single" Name="age_upon_outcome_in_weeks" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spGetMountainWildernessRescue_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="age_upon_outcome" Nullable="true" />
+    <Property Type="String" Name="animal_id" Nullable="true" />
+    <Property Type="String" Name="animal_type" Nullable="true" />
+    <Property Type="String" Name="breed" Nullable="true" />
+    <Property Type="String" Name="color" Nullable="true" />
+    <Property Type="String" Name="date_of_birth" Nullable="true" />
+    <Property Type="String" Name="datetime" Nullable="true" />
+    <Property Type="String" Name="monthyear" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" />
+    <Property Type="String" Name="outcome_subtype" Nullable="true" />
+    <Property Type="String" Name="outcome_type" Nullable="true" />
+    <Property Type="String" Name="sex_upon_outcome" Nullable="true" />
+    <Property Type="Single" Name="location_lat" Nullable="true" />
+    <Property Type="Single" Name="location_long" Nullable="true" />
+    <Property Type="Single" Name="age_upon_outcome_in_weeks" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="aac_shelter_outcomes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="age_upon_outcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="animal_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="animal_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="breed" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="date_of_birth" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="datetime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="monthyear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="outcome_subtype" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="outcome_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sex_upon_outcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="location_lat" Type="Single" />
+    <Property Name="location_long" Type="Single" />
+    <Property Name="age_upon_outcome_in_weeks" Type="Single" />
+  </EntityType>
+</Schema>

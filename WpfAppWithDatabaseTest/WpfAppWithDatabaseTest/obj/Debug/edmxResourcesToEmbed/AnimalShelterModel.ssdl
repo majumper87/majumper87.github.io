@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AnimalShelterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aac_shelter_outcomes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="age_upon_outcome" Type="varchar(max)" />
+    <Property Name="animal_id" Type="varchar(max)" />
+    <Property Name="animal_type" Type="varchar(max)" />
+    <Property Name="breed" Type="varchar(max)" />
+    <Property Name="color" Type="varchar(max)" />
+    <Property Name="date_of_birth" Type="varchar(max)" />
+    <Property Name="datetime" Type="varchar(max)" />
+    <Property Name="monthyear" Type="varchar(max)" />
+    <Property Name="name" Type="varchar(max)" />
+    <Property Name="outcome_subtype" Type="varchar(max)" />
+    <Property Name="outcome_type" Type="varchar(max)" />
+    <Property Name="sex_upon_outcome" Type="varchar(max)" />
+    <Property Name="location_lat" Type="real" />
+    <Property Name="location_long" Type="real" />
+    <Property Name="age_upon_outcome_in_weeks" Type="real" />
+  </EntityType>
+  <Function Name="spGetAnimals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetDisasterIndividualRescue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetMountainWildernessRescue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetWaterRescue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="AnimalShelterModelStoreContainer">
+    <EntitySet Name="aac_shelter_outcomes" EntityType="Self.aac_shelter_outcomes" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

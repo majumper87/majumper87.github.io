@@ -1,0 +1,19 @@
+﻿<Window x:Class="WpfAppWithDatabaseTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppWithDatabaseTest"
+        mc:Ignorable="d"
+        Title="Austin Animal Shelter" Height="900" Width="1200" Background="BlanchedAlmond">
+    <Grid>
+        <DataGrid x:Name="shelterData" Margin="0,217,0.333,-0.333" Width="auto"/>
+        <Label x:Name="header" Content="Austin Animal Shelter" FontSize="38" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Button x:Name="waterButton" Content="Water Rescue" Click="waterButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="mountainButton" Content="Mountain Rescue" Click="mountainButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="118,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="disasterButton" Content="Disaster Rescue" Click="disasterButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="249,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="refreshButton" Content="Refresh" Click="refreshButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="369,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="updateBtn" Content="Update" Click="updateButton_Click"  HorizontalAlignment="Left" Margin="1108,191,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
