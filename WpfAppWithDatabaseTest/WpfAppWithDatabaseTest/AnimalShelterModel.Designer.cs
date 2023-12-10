@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\dev\WpfAppWithDatabaseTest\WpfAppWithDatabaseTest\AnimalShelterModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Mark Jumper\Desktop\CS 499 CS Capstone\CapstoneProject\WpfAppWithDatabaseTest\WpfAppWithDatabaseTest\AnimalShelterModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

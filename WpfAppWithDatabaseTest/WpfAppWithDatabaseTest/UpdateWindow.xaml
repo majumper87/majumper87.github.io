@@ -26,9 +26,9 @@
 
             <TextBlock Margin="7">Animal ID:</TextBlock>
             <TextBox x:Name="txtID" Margin="5" Grid.Column="1"></TextBox>
-            <Button Click="btnGetAnimal_Click" Margin="5" Padding="2" Grid.Column="2">Get Animal</Button>
-            <Button Click="btnUpdateAnimal_Click" Margin="5" Padding="2" Grid.Column="3">Update Animal</Button>
-            <Button Click="btnAddAnimal_Click" Margin="5" Padding="2" Grid.Column="4">Add New Animal</Button>
+            <Button x:Name="btnGetAnimal" Click="btnGetAnimal_Click" Margin="5" Padding="2" Grid.Column="2">Get Animal</Button>
+            <Button x:Name="btnUpdateAnimal" Click="btnUpdateAnimal_Click" Margin="5" Padding="2" Grid.Column="3">Update Animal</Button>
+            <Button x:Name="btnAddAnimal" Click="btnAddAnimal_Click" Margin="5" Padding="2" Grid.Column="4">Add New Animal</Button>
         </Grid>
 
         <Border Grid.Row="1" Padding="7" Margin="7" Background="BlanchedAlmond">

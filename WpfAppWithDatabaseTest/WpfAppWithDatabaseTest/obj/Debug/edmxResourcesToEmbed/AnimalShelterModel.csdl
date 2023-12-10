@@ -7,6 +7,10 @@
     <FunctionImport Name="spGetDisasterIndividualRescue" ReturnType="Collection(AnimalShelterModel.spGetDisasterIndividualRescue_Result)" />
     <FunctionImport Name="spGetMountainWildernessRescue" ReturnType="Collection(AnimalShelterModel.spGetMountainWildernessRescue_Result)" />
     <EntitySet Name="aac_shelter_outcomes" EntityType="AnimalShelterModel.aac_shelter_outcomes" />
+    <EntitySet Name="Users" EntityType="AnimalShelterModel.User" />
+    <FunctionImport Name="sp_CheckPassword" ReturnType="Collection(String)">
+      <Parameter Name="param1" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="spGetAnimals_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -113,5 +117,16 @@
     <Property Name="location_lat" Type="Single" />
     <Property Name="location_long" Type="Single" />
     <Property Name="age_upon_outcome_in_weeks" Type="Single" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="Byte" />
   </EntityType>
 </Schema>

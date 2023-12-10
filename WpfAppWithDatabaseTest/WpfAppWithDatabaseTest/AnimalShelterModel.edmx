@@ -26,12 +26,27 @@
           <Property Name="location_long" Type="real" />
           <Property Name="age_upon_outcome_in_weeks" Type="real" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="tinyint" />
+        </EntityType>
+        <Function Name="sp_CheckPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="param1" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="spGetAnimals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetDisasterIndividualRescue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetMountainWildernessRescue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetWaterRescue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="AnimalShelterModelStoreContainer">
           <EntitySet Name="aac_shelter_outcomes" EntityType="Self.aac_shelter_outcomes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -44,6 +59,10 @@
           <FunctionImport Name="spGetDisasterIndividualRescue" ReturnType="Collection(AnimalShelterModel.spGetDisasterIndividualRescue_Result)" />
           <FunctionImport Name="spGetMountainWildernessRescue" ReturnType="Collection(AnimalShelterModel.spGetMountainWildernessRescue_Result)" />
           <EntitySet Name="aac_shelter_outcomes" EntityType="AnimalShelterModel.aac_shelter_outcomes" />
+          <EntitySet Name="Users" EntityType="AnimalShelterModel.User" />
+          <FunctionImport Name="sp_CheckPassword" ReturnType="Collection(String)">
+            <Parameter Name="param1" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spGetAnimals_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -150,6 +169,17 @@
           <Property Name="location_lat" Type="Single" />
           <Property Name="location_long" Type="Single" />
           <Property Name="age_upon_outcome_in_weeks" Type="Single" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Byte" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -267,6 +297,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AnimalShelterModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_CheckPassword" FunctionName="AnimalShelterModel.Store.sp_CheckPassword" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -23,7 +23,7 @@ namespace WpfAppWithDatabaseTest
     {
         public UpdateWindow()
         {
-            InitializeComponent();    
+            InitializeComponent();
         }
 
         // GetAnimal Click Event

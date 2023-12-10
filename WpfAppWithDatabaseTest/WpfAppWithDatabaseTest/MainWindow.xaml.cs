@@ -80,8 +80,10 @@ namespace WpfAppWithDatabaseTest
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
             // Create new object of the UpdateWindow class and open window.
-            UpdateWindow update = new UpdateWindow();
-            update.Show();
+            //UpdateWindow update = new UpdateWindow();
+            //update.Show();
+            LoginWindow login = new LoginWindow();
+            login.Show();
            
         }
     }

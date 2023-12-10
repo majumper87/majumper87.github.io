@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\dev\WpfAppWithDatabaseTest\WpfAppWithDatabaseTest\obj\Debug\
+C:\Users\Mark Jumper\Desktop\CS 499 CS Capstone\CapstoneProject\WpfAppWithDatabaseTest\WpfAppWithDatabaseTest\obj\Debug\
 WpfAppWithDatabaseTest
 none
 false
 DEBUG;TRACE
-C:\dev\WpfAppWithDatabaseTest\WpfAppWithDatabaseTest\App.xaml
+C:\Users\Mark Jumper\Desktop\CS 499 CS Capstone\CapstoneProject\WpfAppWithDatabaseTest\WpfAppWithDatabaseTest\App.xaml
 3337008949
 41784411067
-17-192089871
-45-1310653006
+18-1668871492
+45168315970
 LoginWindow.xaml;MainWindow.xaml;UpdateWindow.xaml;
 
-False
+True
 

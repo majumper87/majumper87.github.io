@@ -28,6 +28,7 @@ namespace WpfAppWithDatabaseTest
         }
     
         public virtual DbSet<aac_shelter_outcomes> aac_shelter_outcomes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<spGetAnimals_Result> spGetAnimals()
         {
@@ -52,6 +53,15 @@ namespace WpfAppWithDatabaseTest
         public virtual ObjectResult<spGetMountainWildernessRescue_Result> spGetMountainWildernessRescue()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetMountainWildernessRescue_Result>("spGetMountainWildernessRescue");
+        }
+    
+        public virtual ObjectResult<string> sp_CheckPassword(string param1)
+        {
+            var param1Parameter = param1 != null ?
+                new ObjectParameter("param1", param1) :
+                new ObjectParameter("param1", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_CheckPassword", param1Parameter);
         }
     }
 }
