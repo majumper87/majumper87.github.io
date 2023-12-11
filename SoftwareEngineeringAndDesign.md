@@ -225,11 +225,17 @@ def update_map(viewData):
 
 app
 ```
+
 TODO: Add snippet of running dashboard here
 # Enhancements
 This artifact was created early in 2023. It was created to work with the Python libraries for Dash Plotly and MongoDB with PyMongo. The enhancements that I chose to make was to recreate the project using Windows Presentation Foundation (WPF). Among these enhancements was to create a window that displayed the information of the database/.csv file. The other enhancements were to provide to the vendor their specific filters for rescue animals. I accomplished this by creating SQL queries using stored procedures to display to the DataGrid when the relative button is pressed. The second window is to perform other CRUD operations. The third is to provide a login window that determines user roles before accessing the specific CRUD operations.
+
 I decided to create this artifact because most of my career has revolved around Windows Operating systems. I wanted to build an application that could demonstrate software that could be utilized locally for a specific site using this operating system. Much like stand-alone software, one customer could be looking for a specific criterion, while another could be looking for something else. This software would be specific to the customer and their specific location/needs or their customers.
+
 As where the main window displays and filters records, the “Update” window utilizes a search feature based on the Animal ID as it is unique to each. Each textbox is assigned to it’s own field and allows editing. In addition, for adding additional animals, there is a conditional statement that checks to make sure that the Animal ID is unique, or else displays a window prompt to let the user know that the ID already exists. For the delete function, the user is prompted with an “are you sure” message before deletion.
+
 Most of the objectives in my enhancement plan have been finished by re-creating the display windows and the ability to perform CRUD operations. The only other update that has not been completed was to create and implement a user login solution. This window would be placed in the middle of the update window to perform the CRUD operations. As well, I would need to create a window to add additional users and user roles, along with implementing further conditionals within the code to query these users and roles.
+
 Some of the things I have learned from creating this artifact has been utilizing the DataGrid in WPF along with passing information to the grid by utilizing stored procedures in the database and importing them into the application. The next step was to utilize Entity Framework to create the collection(s) that then get returned to the grid. In addition, with displaying individual components of a single document to an associated textbox that can then also be used to edit the SQL database. Some of the challenges with this was to create the window, name all of the textboxes and then figuring out how to return a single item from the collection to an individual textbox.
+
 TODO: Add snippets of code and windows here 
