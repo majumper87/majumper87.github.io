@@ -1,4 +1,3 @@
 # Software Engineering and Design
-
 ## Narative
-This is a test of formatting
+The project that I will be using is from CS 340 - Client/Server Development. For the final project for this course, we were tasked with creating a Graphical User Interface using Dash Plotly. Dash Plotly is a library for working with Python that includes HTML tags for creating a layout. With this layout, there is a header, radio buttons and a grid for displaying information from the database used for the project. This is related to Software Engineering and Design in that the layout was designed around filtering and displaying specific information for the "Customer".
