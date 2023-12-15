@@ -190,6 +190,8 @@ VALUES ('Admin', 'Admin', 'Admin@Test.com', HASHBYTES('SHA2_256', N'Admin123'), 
 	   ('Supervisor', 'Supervisor', 'Supervisor@Test.com', HASHBYTES('SHA2_256', N'Supervisor123'), 2),
 	   ('Employee', 'Employee', 'Employee@Test.com', HASHBYTES('SHA2_256', N'Employee123'), 1)
 ```
+![image](https://github.com/majumper87/majumper87.github.io/assets/75309837/c681b0aa-11d1-4ab9-b66e-d3dc2786162b)
+
 #### T-SQL Stored Procedure to Convert and Check Passwords
 ```
 CREATE PROCEDURE [dbo].[sp_CheckPassword]
