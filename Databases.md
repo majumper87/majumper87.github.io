@@ -31,7 +31,7 @@ VALUES ('Admin', 'Admin', 'Admin@Test.com', HASHBYTES('SHA2_256', N'Admin123'), 
 
 ## Login Window
 In the WPF application, LoginWindow.xaml.cs, I implement this by using if/else statements to evaluate the user’s role in the user table to determine the elements available to that user. These include the visibility and use of either the delete, update, or add buttons in the UpdateWindow.xaml.cs before opening the window.
-# LoginWindow.xaml
+#### LoginWindow.xaml
 ```
 <Window x:Class="WpfAppWithDatabaseTest.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -55,7 +55,7 @@ In the WPF application, LoginWindow.xaml.cs, I implement this by using if/else s
     </Border>
 </Window>
 ```
-# LoginWindow.xaml.cs
+#### LoginWindow.xaml.cs
 ```
 using System;
 using System.Collections.Generic;
