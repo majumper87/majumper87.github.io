@@ -241,4 +241,443 @@ Most of the objectives in my enhancement plan have been finished by re-creating 
 
 Some of the things I have learned from creating this artifact has been utilizing the DataGrid in WPF along with passing information to the grid by utilizing stored procedures in the database and importing them into the application. The next step was to utilize Entity Framework to create the collection(s) that then get returned to the grid. In addition, with displaying individual components of a single document to an associated textbox that can then also be used to edit the SQL database. Some of the challenges with this was to create the window, name all of the textboxes and then figuring out how to return a single item from the collection to an individual textbox.
 
-TODO: Add snippets of code and windows here 
+MainWindow.xaml - in this codeblock, I show the layout that is used for the application.
+```
+<Window x:Class="WpfAppWithDatabaseTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppWithDatabaseTest"
+        mc:Ignorable="d"
+        Title="Austin Animal Shelter" Height="900" Width="1200" Background="BlanchedAlmond">
+    <Grid>
+        <DataGrid x:Name="shelterData" Margin="0,217,0.333,-0.333" Width="auto"/>
+        <Label x:Name="header" Content="Austin Animal Shelter" FontSize="38" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Button x:Name="waterButton" Content="Water Rescue" Click="waterButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="mountainButton" Content="Mountain Rescue" Click="mountainButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="118,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="disasterButton" Content="Disaster Rescue" Click="disasterButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="249,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="refreshButton" Content="Refresh" Click="refreshButton_Click" FontSize="14" HorizontalAlignment="Left" Margin="369,195,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Button x:Name="updateBtn" Content="Update" Click="updateButton_Click"  HorizontalAlignment="Left" Margin="1108,191,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
+```
+MainWindow.xaml.cs - This codeblock shows the underlying C# that performs the actions of the initial window display, and actions performed by button clicks.
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace WpfAppWithDatabaseTest
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            // Initializes DataGrid
+            AnimalShelterEntities db = new AnimalShelterEntities();
+
+            var r = from d in db.spGetAnimals1()
+                    select d;
+
+            this.shelterData.ItemsSource = r.ToList();
+            
+        }
+
+        // This is the function for the Water button that returns the Water Rescue animals
+        private void waterButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Initialize DB and create variable to hold Stored Procedure Colletion
+            AnimalShelterEntities db = new AnimalShelterEntities();
+            var r = from d in db.spGetWaterRescue()
+                    select d;
+            shelterData.ItemsSource = r.ToList();
+        }
+
+        // This is the function for the Mountain button that returns the Mountain/Wilderness Rescue animals
+        private void mountainButton_Click(Object sender, RoutedEventArgs e)
+        {
+            // Initialize DB and create variable to hold Stored Procedure Colletion
+            AnimalShelterEntities db = new AnimalShelterEntities();
+            var r = from d in db.spGetMountainWildernessRescue()
+                    select d;
+            shelterData.ItemsSource = r.ToList();
+        }
+
+        // This is the function for the Disaster button that returns the Disaster Rescue animals
+        private void disasterButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Initialize DB and create variable to hold Stored Procedure Colletion
+            AnimalShelterEntities db = new AnimalShelterEntities();
+            var r = from d in db.spGetDisasterIndividualRescue()
+                    select d;
+            shelterData.ItemsSource = r.ToList();
+        }
+
+        // Refresh button to return all animals
+        private void refreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Initialize DB and create variable to hold Stored Procedure Colletion
+            AnimalShelterEntities db = new AnimalShelterEntities();
+            var r = from d in db.spGetAnimals1()
+                    select d;
+            shelterData.ItemsSource = r.ToList();
+        }
+
+        // This opens the update menue
+        private void updateButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create new object of the UpdateWindow class and open window.
+            //UpdateWindow update = new UpdateWindow();
+            //update.Show();
+            LoginWindow login = new LoginWindow();
+            login.Show();
+           
+        }
+    }
+}
+
+```
+
+UpdateWindow.xaml - This is the layout of the update window
+```
+<Window x:Class="WpfAppWithDatabaseTest.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppWithDatabaseTest"
+        mc:Ignorable="d"
+        Title="UpdateWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="7">Animal ID:</TextBlock>
+            <TextBox x:Name="txtID" Margin="5" Grid.Column="1"></TextBox>
+            <Button x:Name="btnGetAnimal" Click="btnGetAnimal_Click" Margin="5" Padding="2" Grid.Column="2">Get Animal</Button>
+            <Button x:Name="btnUpdateAnimal" Click="btnUpdateAnimal_Click" Margin="5" Padding="2" Grid.Column="3">Update Animal</Button>
+            <Button x:Name="btnAddAnimal" Click="btnAddAnimal_Click" Margin="5" Padding="2" Grid.Column="4">Add New Animal</Button>
+        </Grid>
+
+        <Border Grid.Row="1" Padding="7" Margin="7" Background="BlanchedAlmond">
+            <Grid Name="gridAnimalDetails">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    
+                                    
+                </Grid.RowDefinitions>
+                
+                <TextBlock Margin="7">Age Upon Outcome:</TextBlock>
+                <TextBox x:Name="txtAgeUponOutcome" Margin="5" Grid.Column="1"
+                    Text=""></TextBox>
+            
+                <TextBlock Margin="7" Grid.Row="1">Animal ID:</TextBlock>
+                <TextBox x:Name="txtAnimalId" Margin="5" Grid.Row="1" Grid.Column="1"
+                    Text="{Binding Path=animal_id}"></TextBox>
+            
+                <TextBlock Margin="7" Grid.Row="2">Animal Type:</TextBlock>
+                <TextBox x:Name="txtAnimalType" Margin="5" Grid.Row="2" Grid.Column="1"
+                    Text="{Binding Path=animal_type}"></TextBox>
+            
+                <TextBlock Margin="7" Grid.Row="3">Breed:</TextBlock>
+                <TextBox x:Name="txtBreed" Margin="5" Grid.Row="3" Grid.Column="1"
+                    Text="{Binding Path=breed}"></TextBox>
+            
+                <TextBlock Margin="7" Grid.Row="4">Color:</TextBlock>
+                <TextBox x:Name="txtColor" Margin="5" Grid.Row="4" Grid.Column="1"
+                    Text="{Binding Path=color}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="5">Date of Birth:</TextBlock>
+                <TextBox x:Name="txtDateOfBirth" Margin="5" Grid.Row="5" Grid.Column="1"
+                    Text="{Binding Path=date_of_birth}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="6">DateTime:</TextBlock>
+                <TextBox x:Name="txtDateTime" Margin="5" Grid.Row="6" Grid.Column="1"
+                    Text="{Binding Path=datetime}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="7">Month/Year:</TextBlock>
+                <TextBox x:Name="txtMonthYear" Margin="5" Grid.Row="7" Grid.Column="1"
+                    Text="{Binding Path=monthyear}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="8">Name:</TextBlock>
+                <TextBox x:Name="txtName" Margin="5" Grid.Row="8" Grid.Column="1"
+                    Text="{Binding Path=name}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="9">Outcome Subtype:</TextBlock>
+                <TextBox x:Name="txtOutcomeSubtype" Margin="5" Grid.Row="9" Grid.Column="1"
+                    Text="{Binding Path=outcome_subtype}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="10">Outcome Type:</TextBlock>
+                <TextBox x:Name="txtOutcomeType" Margin="5" Grid.Row="10" Grid.Column="1"
+                    Text="{Binding Path=outcome_type}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="11">Sex Upon Outcome:</TextBlock>
+                <TextBox x:Name="txtSexUponOutcome" Margin="5" Grid.Row="11" Grid.Column="1"
+                    Text="{Binding Path=sex_upon_outcome}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="12">Location Lat:</TextBlock>
+                <TextBox x:Name="txtLocLat" Margin="5" Grid.Row="12" Grid.Column="1"
+                    Text="{Binding Path=location_lat}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="13">Location Long:</TextBlock>
+                <TextBox x:Name="txtLocLong" Margin="5" Grid.Row="13" Grid.Column="1"
+                    Text="{Binding Path=location_long}"></TextBox>
+
+                <TextBlock Margin="7" Grid.Row="14">Age In Weeks:</TextBlock>
+                <TextBox x:Name="txtAgeUponOutcomeInWeeks" Margin="5" Grid.Row="14" Grid.Column="1"
+                    Text="{Binding Path=age_upon_outcome_in_weeks}"></TextBox>
+
+                <Button Margin="30" Grid.Row="15" Grid.Column="2" x:Name="btnDelete" Content="Delete" FontSize="12"
+                        Click="btnDeleteAnimal_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+```
+UpdateWindow.xaml.cs - This codeblock shows the object reference to button clicks and the relation between the object, textblocks and CRUD methods
+```
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Xml.Linq;
+
+namespace WpfAppWithDatabaseTest
+{
+    /// <summary>
+    /// Interaction logic for Update.xaml
+    /// </summary>
+    public partial class UpdateWindow : Window
+    {
+        public UpdateWindow()
+        {
+            InitializeComponent();
+        }
+
+        // GetAnimal Click Event
+        private void btnGetAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            // Initialize DB and create variable to hold Colletion to search datastore based off of Unique Animal ID
+            AnimalShelterEntities db = new AnimalShelterEntities();
+
+            var r = from d in db.aac_shelter_outcomes
+                    where d.animal_id == txtID.Text
+                    select d;
+
+            // Return Animal to associated fields
+            foreach (var item in r)
+            {
+                txtAgeUponOutcome.Text = item.age_upon_outcome.ToString();
+                txtAnimalId.Text = item.animal_id.ToString();
+                txtAnimalType.Text = item.animal_type.ToString();
+                txtBreed.Text = item.breed.ToString();
+                txtColor.Text = item.color.ToString();
+                txtDateOfBirth.Text = item.date_of_birth.ToString();
+                txtDateTime.Text = item.datetime.ToString();
+                txtMonthYear.Text = item.monthyear.ToString();
+                txtName.Text = item.name.ToString();
+                txtOutcomeSubtype.Text = item.outcome_subtype.ToString();
+                txtOutcomeType.Text = item.outcome_type.ToString();
+                txtSexUponOutcome.Text = item.sex_upon_outcome.ToString();
+                txtLocLat.Text = item.location_lat.ToString();
+                txtLocLong.Text = item.location_long.ToString();
+                txtAgeUponOutcomeInWeeks.Text = item.age_upon_outcome_in_weeks.ToString();
+
+            }
+
+        }
+
+        // Update Click Event
+        private void btnUpdateAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            // Initialize DB and return row based on Animal ID
+            AnimalShelterEntities db = new AnimalShelterEntities();
+
+            var r = from d in db.aac_shelter_outcomes
+                    where d.animal_id == txtID.Text
+                    select d;
+
+            // Make sure that object is a single record
+            aac_shelter_outcomes obj = r.SingleOrDefault();
+
+            // Make sure that we are working with an object and Return to associated fields
+            if (obj != null)
+            {
+                obj.age_upon_outcome = txtAgeUponOutcome.Text;
+                obj.animal_type = txtAnimalType.Text;
+                obj.breed = txtBreed.Text;
+                obj.color = txtColor.Text;
+                obj.date_of_birth = txtDateOfBirth.Text;
+                obj.datetime = txtDateTime.Text;
+                obj.monthyear = txtMonthYear.Text;
+                obj.name = txtName.Text;
+                obj.outcome_subtype = txtOutcomeSubtype.Text;
+                obj.outcome_type = txtOutcomeType.Text;
+                obj.sex_upon_outcome = txtSexUponOutcome.Text;
+                obj.location_lat = float.Parse(txtLocLat.Text);
+                obj.location_long = float.Parse(txtLocLong.Text);
+                obj.age_upon_outcome_in_weeks = float.Parse(txtAgeUponOutcomeInWeeks.Text);
+
+                // Actual event to save any changes when button is clicked
+                db.SaveChanges();
+            }
+
+            
+        }
+
+        private void btnAddAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            
+            //Dictionary<string, r > r = null;
+            // Initialize DB and return single
+            AnimalShelterEntities db = new AnimalShelterEntities();
+
+            var r = from d in db.aac_shelter_outcomes
+                    where (d.animal_id == txtID.Text || d.animal_id == txtAnimalId.Text)
+                    select d;
+
+            // Make sure returned is a single row
+            aac_shelter_outcomes obj = r.SingleOrDefault();
+            
+            // FIXME: Testing for null pointer - make sure that "Animal ID" "search box" at top is populated
+            /*
+            MessageBox.Show(txtID.Text);
+            MessageBox.Show(txtAnimalId.Text);
+            MessageBox.Show(obj.animal_id);
+            */
+                        
+            // Make sure that "New" Animal ID is Unique
+            if (/*txtID.Text == "" || */ obj.animal_id != txtID.Text || obj.animal_id != txtAnimalId.Text)
+            {
+                aac_shelter_outcomes animal = new aac_shelter_outcomes()
+                {
+                    age_upon_outcome = txtAgeUponOutcome.Text,
+                    animal_id = txtAnimalId.Text,
+                    animal_type = txtAnimalType.Text,
+                    breed = txtBreed.Text,
+                    color = txtColor.Text,
+                    date_of_birth = txtDateOfBirth.Text,
+                    datetime = txtDateTime.Text,
+                    monthyear = txtMonthYear.Text,
+                    name = txtName.Text,
+                    outcome_subtype = txtOutcomeSubtype.Text,
+                    outcome_type = txtOutcomeType.Text,
+                    sex_upon_outcome = txtSexUponOutcome.Text,
+                    location_lat = float.Parse(txtLocLat.Text),
+                    location_long = float.Parse(txtLocLong.Text),
+                    age_upon_outcome_in_weeks = float.Parse(txtAgeUponOutcomeInWeeks.Text)
+
+                };
+
+                // Add animal to table and save changes
+                db.aac_shelter_outcomes.Add(animal);
+                db.SaveChanges();
+            }
+            else
+            {
+                // Let the user know if Animal ID is not unique
+                MessageBox.Show("Not Unique Animal ID");
+            }
+                        
+        }
+
+        private void btnDeleteAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            // Display message box to give the user an option to cancle if button was unintentionally pressed
+            MessageBoxResult msg = MessageBox.Show("Are you sure you want to Delete record?",
+                "Delete Animal record",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning,
+                MessageBoxResult.No);
+
+            // Conditional statement based on user Input if pressed "yes"
+            if (msg == MessageBoxResult.Yes)
+            {
+                // Initialize and return single record based on Animal ID
+                AnimalShelterEntities db = new AnimalShelterEntities();
+
+                var r = from d in db.aac_shelter_outcomes
+                        where d.animal_id == txtID.Text
+                        select d;
+
+                // Make sure it is a single record in the table
+                aac_shelter_outcomes obj = r.SingleOrDefault();
+
+                if (obj.animal_id == txtID.Text)
+                {
+                    db.aac_shelter_outcomes.Remove(obj);
+                    db.SaveChanges();
+
+                    // let user know that record was deleted
+                    MessageBox.Show("Animal Record Deleted!");
+                }
+            }
+
+        }
+    }
+}
+```
