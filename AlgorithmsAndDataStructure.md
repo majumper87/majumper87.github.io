@@ -2,9 +2,9 @@
 
 ## Narative
 
-The artifact I chose to use for Algorithms and Data Structures comes from CS - 340 Client/Server Development. In the project, I used PyMongo to work with the MongoDB database. Also within this project, I had to create a user/password to connect with the MongoDB. For my enhancement, I wanted to remove the "in text" username and password variables and also include hashing to store the user passwords.
+The artifact I chose to use for Algorithms and Data Structures comes from CS - 340 Client/Server Development. In the project, I used PyMongo to work with the MongoDB database. Also within this project, I had to create user and password variables to send as arguments in order to connect with the MongoDB client. For my enhancement, I wanted to remove the "in text" username and password variables and also include hashing to store the usernames and passwords in a datase and create a Login Window to access the Create, Update, and Delete functions in a separate Update Window.
 #### ProjectTwoDashboard
-In the begining of the program, you can see that the username and password are stored in plain text.
+In the begining of the program, you can see that the username and password are stored in plain text. These variables are then sent to the animalShelter.py program to connect to the MongoDB client to perform CRUD actions in MongoDB.
 ```
 from jupyter_plotly_dash import JupyterDash
 
@@ -177,55 +177,204 @@ def update_chart(val, children):
         )                                                           
         ]
 
-@app.callback(
-    Output('datatable-id', 'style_data_conditional'),
-    [Input('datatable-id', 'selected_columns')]
-)
-def update_styles(selected_columns):
-    return [{
-        'if': { 'column_id': i },
-        'background_color': '#D2F3FF'
-    } for i in selected_columns]
-
-@app.callback(
-    Output('graph-id', "children"),
-    [Input('datatable-id', "derived_viewport_data")])
-def update_graphs(viewData):
-    ###FIX ME ####
-    # add code for chart of your choice (e.g. pie chart) #
-    dff = pd.DataFrame.from_dict(viewData)
-    return [
-        dcc.Graph(
-            
-            figure = px.scatter(dff, x = "age_upon_outcome_in_weeks",y="age_upon_outcome_in_weeks", color="breed")
-        )    
-    ]
-
-@app.callback(
-    Output('map-id', "children"),
-    [Input('datatable-id', "derived_viewport_data")]
-)
-def update_map(viewData):
-#FIXME: Add in the code for your geolocation chart
-    dff = pd.DataFrame.from_dict(viewData)
-    # Austin TX is at [30.75,-97.48]
-    return [
-        dl.Map(style={'width': '1000px', 'height': '500px'}, center=[30.75,-97.48], zoom=10, children=[
-            dl.TileLayer(id="base-layer-id"),
-            # Marker with tool tip and popup
-            dl.Marker(position=[30.75,-97.48], children=[
-                dl.Tooltip(dff.iloc[0,4]),
-                dl.Popup([
-                    html.H1("Animal Name"),
-                    html.P(dff.iloc[1,9])
-                ])
-            ])
-        ])
-    ]                  
-#If you completed the Module Six Assignment, you can copy in the code you created here.
-
-
 
 app
 ```
+## Enhancements
+For my enhancements, I took the LoginWindow that I created for the Software Engineering/Design to first query the database based on user login and password. The username (email) is queried first, then I created a stored procedure to take the password from user input and hash it to compare the password stored in the database. If these match, the user object is then used to see the role of the returned user to determine what CRUD operations are available.
+#### Test Data with Hashed Passwords
+```
+INSERT INTO [Users] (FirstName, LastName, Email, Password, role)
+VALUES ('Admin', 'Admin', 'Admin@Test.com', HASHBYTES('SHA2_256', N'Admin123'), 4),
+	   ('Manager', 'Manager', 'Manager@Test.com', HASHBYTES('SHA2_256', N'Manager123'), 3),
+	   ('Supervisor', 'Supervisor', 'Supervisor@Test.com', HASHBYTES('SHA2_256', N'Supervisor123'), 2),
+	   ('Employee', 'Employee', 'Employee@Test.com', HASHBYTES('SHA2_256', N'Employee123'), 1)
+```
+#### T-SQL Stored Procedure to Convert and Check Passwords
+```
+CREATE PROCEDURE [dbo].[sp_CheckPassword]
+	@param1 nvarchar(50) = ''
+AS
+BEGIN
+DECLARE @hash nvarchar(50);
+SET @hash = HASHBYTES('SHA2_256', @param1);
+	SELECT @hash
+RETURN 0
+END
+```
+#### LoginWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
+namespace WpfAppWithDatabaseTest
+{
+    
+    /// <summary>
+    /// Interaction logic for LoginWindow.xaml
+    /// </summary>
+    public partial class LoginWindow : Window
+    {
+        public LoginWindow()
+        {
+            InitializeComponent();
+        }
+
+        /*
+        public class UserRoleAuth
+        {
+            public AnimalShelterEntities roles = new AnimalShelterEntities()
+            {
+
+            }
+            
+        }
+        */
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (isValidated())
+            {
+                // create the entity variable to return the row based on user email
+                AnimalShelterEntities db = new AnimalShelterEntities();
+                var r = from d in db.Users
+                        where d.Email.Equals(txtUserName.Text)
+                        select d;
+
+                // create variable to hold string from passwordbox
+                PasswordBox pwd = new PasswordBox();
+                pwd.Password = txtPassword.Password;
+
+                // create entity from passwordbox to use the stored procedure to create and return hashed value
+                AnimalShelterEntities dbcheck = new AnimalShelterEntities();
+                var psswd = from d in dbcheck.sp_CheckPassword(pwd.Password)
+                            select d;
+
+                // get returned hash from stored procedure to check user password hash
+                string password = psswd.SingleOrDefault();
+
+                // return user object to display text
+                User obj = r.SingleOrDefault();
+                
+                // This section block was used for testing
+                /*
+                MessageBox.Show(pwd.Password);
+                MessageBox.Show(password);
+                MessageBox.Show(obj.Password);
+                 */
+
+                // check that obj is not null
+                if (obj == null)
+                {
+                    MessageBox.Show("User not Recognized");
+                }
+
+                // make checks to verify that passwordbox hash equals hash for user stored in the user table, then open update window and close login window
+                else
+                {
+                    if (obj.Password == password)
+                    {
+                        // Verify user role and Auth level for CRUD operations and button visibility - also disabled buttons to be sure to remove functionality
+                        // 4 - Admin
+                        // 3 - Manager
+                        // 2 - Supervisor
+                        // 1 - Employee
+
+                        if (obj.Role == 4)
+                        {
+                            UpdateWindow update = new UpdateWindow();
+                            update.Show();
+
+                            this.Close();
+                        }
+                        else if (obj.Role == 3)
+                        {
+                            UpdateWindow update = new UpdateWindow();
+                            update.btnDelete.IsEnabled = false;
+                            update.btnDelete.Visibility = Visibility.Collapsed;
+                            update.Show();
+
+                            this.Close();
+                        }
+                        else if (obj.Role == 2)
+                        {
+                            UpdateWindow update = new UpdateWindow();
+                            update.btnDelete.IsEnabled = false;
+                            update.btnDelete.Visibility = Visibility.Collapsed;
+                            update.btnUpdateAnimal.IsEnabled = false;
+                            update.btnUpdateAnimal.Visibility = Visibility.Collapsed;
+                            update.Show();
+
+                            this.Close();
+                        }
+                        else if (obj.Role == 1)
+                        {
+                            UpdateWindow update = new UpdateWindow();
+                            update.btnDelete.IsEnabled = false;
+                            update.btnDelete.Visibility = Visibility.Collapsed;
+                            update.btnUpdateAnimal.IsEnabled = false;
+                            update.btnUpdateAnimal.Visibility = Visibility.Collapsed;
+                            update.btnAddAnimal.IsEnabled = false;
+                            update.btnAddAnimal.Visibility = Visibility.Collapsed;
+                            
+                            update.Show();
+
+                            this.Close();
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong Password");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("wrong password");
+            }
+            
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: create registration window
+        }
+
+        // this is to check that Username and Password fields are populated upon hitting the submit button
+        private bool isValidated()
+        {
+            if(txtUserName.Text == string.Empty)
+            {
+                MessageBox.Show("Enter Username");
+                txtUserName.Clear();
+                txtPassword.Clear();
+                txtUserName.Focus();
+                return false;
+            }
+            if (txtPassword.Password == string.Empty)
+            {
+                MessageBox.Show("Enter Username");
+                txtPassword.Clear();
+                txtUserName.Focus();
+                return false;
+            }
+            return true;
+        }
+    }
+}
+```
