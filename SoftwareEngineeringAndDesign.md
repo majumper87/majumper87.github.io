@@ -227,8 +227,9 @@ def update_map(viewData):
 
 app
 ```
+![image](https://github.com/majumper87/majumper87.github.io/assets/75309837/b672230d-c537-4c7d-99a4-efa8e0ed70ae)
 
-TODO: Add snippet of running dashboard here
+
 # Enhancements
 This artifact was created early in 2023. It was created to work with the Python libraries for Dash Plotly and MongoDB with PyMongo. The enhancements that I chose to make was to recreate the project using Windows Presentation Foundation (WPF). Among these enhancements was to create a window that displayed the information of the database/.csv file. The other enhancements were to provide to the vendor their specific filters for rescue animals. I accomplished this by creating SQL queries using stored procedures to display to the DataGrid when the relative button is pressed. The second window is to perform other CRUD operations. The third is to provide a login window that determines user roles before accessing the specific CRUD operations.
 
