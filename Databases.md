@@ -31,7 +31,31 @@ VALUES ('Admin', 'Admin', 'Admin@Test.com', HASHBYTES('SHA2_256', N'Admin123'), 
 
 ## Login Window
 In the WPF application, LoginWindow.xaml.cs, I implement this by using if/else statements to evaluate the user’s role in the user table to determine the elements available to that user. These include the visibility and use of either the delete, update, or add buttons in the UpdateWindow.xaml.cs before opening the window.
-
+# LoginWindow.xaml
+```
+<Window x:Class="WpfAppWithDatabaseTest.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppWithDatabaseTest"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800" FontSize="14" Background="BlanchedAlmond">
+    <Border Background="Gray" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+            <Label Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
+            <Separator></Separator>
+            <Label Content="Username" Foreground="White"/>
+            <TextBox Name="txtUserName" Background="#545d6a" Foreground="White" FontSize="22"/>
+            <Label Content="Password" Foreground="White"/>
+            <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="22"/>
+            <Button Name="btnSubmit" Content="Submit" Click="btnSubmit_Click" Margin="200 20" Background="#545d6a" Foreground="White" FontSize="22"/>
+            <Button Name="btnRegister" Content="Register" Click="btnRegister_Click" Margin="200 0" Background="#545d6a" Foreground="White" FontSize="22"/>
+        </StackPanel>
+    </Border>
+</Window>
+```
+# LoginWindow.xaml.cs
 ```
 using System;
 using System.Collections.Generic;
