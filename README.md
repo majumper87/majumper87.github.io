@@ -1,6 +1,9 @@
 [README.md](https://github.com/majumper87/majumper87.github.io/blob/main/README.md) - [Code Review](https://youtu.be/V6MCl8RoXNo) - [Software Engineering/Design](https://github.com/majumper87/majumper87.github.io/blob/main/SoftwareEngineeringAndDesign.md) - [Algorithms and Data Structures](https://github.com/majumper87/majumper87.github.io/blob/main/AlgorithmsAndDataStructure.md) - [Databases](https://github.com/majumper87/majumper87.github.io/blob/main/Databases.md)
+# Mark Jumper SNHU CS 499 ePortfolio
+![image](https://github.com/majumper87/majumper87.github.io/assets/75309837/b3107c71-3674-42e8-8a58-d692775ab6f1)
 
-# Self Assessment
+
+## Self Assessment
 
 I started out by first obtaining IT certifications - CompTIA A+ and Network+. As I continued to learned more, my thirst for knowledge led me to want to obtain a degree in Computer Science. The Computer Science course program has opened more doors than I know to walk through. Even in this ePortfolio, it only showcases use of Python, HTML, C# and XAML, MongoDB, and SQL. These are just a few of the examples of the languages that I worked with in my time with SNHU.
 
