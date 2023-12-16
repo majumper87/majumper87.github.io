@@ -4,7 +4,7 @@
 
 ## Narative
 
-The artifact I chose to use for Algorithms and Data Structures comes from CS - 340 Client/Server Development. In the project, I used PyMongo to work with the MongoDB database. Also within this project, I had to create user and password variables to send as arguments in order to connect with the MongoDB client. For my enhancement, I wanted to remove the "in text" username and password variables and also include hashing to store the usernames and passwords in a datase and create a Login Window to access the Create, Update, and Delete functions in a separate Update Window.
+The artifact I chose to use for Algorithms and Data Structures comes from CS - 340 Client/Server Development. In the project, I used PyMongo to work with the MongoDB database. Also within this project, I had to create user and password variables to send as arguments in order to connect with the MongoDB client. For my enhancement, I wanted to remove the "in text" username and password variables and also include hashing to store the usernames and passwords in a database and create a Login Window to access the Create, Update, and Delete functions in a separate Update Window.
 #### ProjectTwoDashboard
 In the begining of the program, you can see that the username and password are stored in plain text. These variables are then sent to the animalShelter.py program to connect to the MongoDB client to perform CRUD actions in MongoDB.
 ```
